@@ -962,6 +962,23 @@ exports.Formats = [
 		searchShow: false,
 		ruleset: ['Pokemon', 'Same Type Clause', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod']
 	},
+	{
+		name: "Accessorize",
+		section: "Other Metagames",
+		searchShow: false,
+		ruleset: ['OU'],
+
+		validateSet: function (set) {
+			var template = this.getTemplate(set.species || set.name);
+			var item = this.getItem(set.item);
+
+			switch (item.id) {
+			case 'mysticwater':
+				if (template.baseStats.spe <= 10) return ["" + template.species + " does not have enough Speed to hold " + item.name + "."];
+				break;
+			}
+		}
+	}
 
 	// BW2 Singles
 	///////////////////////////////////////////////////////////////////
